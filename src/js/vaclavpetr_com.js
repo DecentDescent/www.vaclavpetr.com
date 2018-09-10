@@ -1,46 +1,5 @@
 var language = $("html").attr("lang");
 
-var slickInit = function() {
-  $(".performers").slick({
-    dots: true,
-    infinite: true,
-    speed: 300,
-    arrows: false,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
-        }
-      },
-      {
-        breakpoint: 320,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  });
-};
-
 $(".program__post").on("click", function() {
   $("body").addClass("modal--active");
   var thisTitle = $(this).attr("data-title");
@@ -135,10 +94,17 @@ $(function() {
         .hide()
         .fadeIn();
       if ($(".program__post:hidden").length == 0) {
-        $("#concerts button.load-more").fadeOut("slow");
+        $("#concerts button.load-more").hide();
       }
     });
   }
+});
+
+$(function() {
+  $("#bio button.load-more").on("click", function(e) {
+    $("#bio-more").removeAttr("hidden");
+    $("#bio button.load-more").hide();
+  });
 });
 
 $(function() {

@@ -162,8 +162,16 @@ wp_reset_postdata();
         if ( $pageBio ){ ?>
 
         <h1><?php echo $pageBio[0]->post_title; ?></h1>
-        <?php echo apply_filters('the_content', $pageBio[0]->post_content); ?>
+        <hr>
+        <?php echo get_extended(apply_filters('the_content', $pageBio[0]->post_content))['main']; ?>
+        <div id="bio-more" hidden>
+        <?php echo get_extended(apply_filters('the_content', $pageBio[0]->post_content))['extended']; ?>
+        </div>
         <?php } ?>
+       <button class="load-more">
+           <?php if ($q_config['language'] == 'cs'): ?>Číst Více<?php endif; ?>
+           <?php if ($q_config['language'] == 'en'): ?>Read More<?php endif; ?>
+        </button>
     </div>
 </section>
 
@@ -188,7 +196,7 @@ wp_reset_postdata();
 
         <h1><?php echo $pageConcerts[0]->post_title; ?></h1>
         <hr>
-        <?php echo $pageConcerts[0]->post_content;; ?>
+        <?php echo $pageConcerts[0]->post_content; ?>
         <?php } ?>
     </div>
     <div class="container container--narrow">
@@ -259,15 +267,17 @@ wp_reset_postdata();
 <section id="photos" class="section">
 <div class="container">
         <?php
-        $pageBio = get_posts(
+        $pagePhotos = get_posts(
             array(
                 'name'      => 'photos',
                 'post_type' => 'page'
             )
         );
-        if ( $pageBio ){ ?>
+        if ( $pagePhotos ){ ?>
 
-        <h1><?php echo $pageBio[0]->post_title; ?></h1>
+        <h1><?php echo $pagePhotos[0]->post_title; ?></h1>
+        <hr>
+        <?php echo $pagePhotos[0]->post_content; ?>
         <?php } ?>
     </div>
 </section>
@@ -292,6 +302,7 @@ wp_reset_postdata();
         if ( $pageContact ){ ?>
 
         <h1><?php echo $pageContact[0]->post_title; ?></h1>
+        <hr>
         <?php echo apply_filters('the_content', $pageContact[0]->post_content); ?>
         <?php } ?>
         <a href="http://www.bigthings.cz" class="footer__studio" target="_blank">
